@@ -1,7 +1,39 @@
-
 @import "tailwindcss";
 
 body {
     font-family: 'Inter', sans-serif;
 }
 
+.custom-checkbox:checked {
+    background-color: #115e59;
+    /* Dark Teal */
+    border-color: #115e59;
+    /* Dark Teal */
+}
+
+.custom-checkbox:checked::before {
+    content: '✓';
+    color: white;
+    display: block;
+    text-align: center;
+    line-height: 1.25rem;
+    /* Matches h-5 */
+    font-size: 0.8rem;
+}
+
+/* Animation for tasks appearing */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item {
+    animation: fadeIn 0.3s ease-out;
+}
