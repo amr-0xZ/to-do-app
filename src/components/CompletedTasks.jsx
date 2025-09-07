@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CompletedTasks = () => {
+const CompletedTasks = (tasks) => {
   return (
     <div>CompletedTasks</div>
   )
