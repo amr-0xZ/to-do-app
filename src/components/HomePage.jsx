@@ -62,7 +62,7 @@ const HomePage = () => {
       <AppContainer>
         <Header />
         <AddForm />
-        {/* <TasksViewer /> */}
+        <TasksViewer />
       </AppContainer>
     </TasksContext.Provider>
   );

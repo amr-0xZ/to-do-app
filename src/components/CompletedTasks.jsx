@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
+import TasksContext from "../contexts/TasksContext";
+import EmptyCompleted from "./EmptyCompleted";
 
-const CompletedTasks = (tasks) => {
-  return (
-    <div>CompletedTasks</div>
-  )
-}
+const CompletedTasks = () => {
+  return <EmptyCompleted />;
+};
 
-export default CompletedTasks
+export default CompletedTasks;
