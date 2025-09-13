@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import EmptyActive from "./EmptyActive";
 import ActiveList from "./ActiveList";
+import TasksContext from "../contexts/TasksContext";
 
 const Tasks = () => {
-  // const [view, setView] = useState(<ActiveList atasks={tasks} edit={edit} del={del} complete={complete} />)
+  const tasksState = useContext(TasksContext);
+  const [view, setView] = useState(<ActiveList />);
 
-  return (
-    <>
-      <EmptyActive />
-    </>
-  );
+  useEffect(() => {
+    const activeTasks = tasksState.tasks.filter((task) => !task.done);
+    if (activeTasks.length == 0) {
+      setView(<EmptyActive />);
+    } else {
+      setView(<ActiveList />);
+    }
+  }, [tasksState.tasks]);
+
+  return <>{view}</>;
 };
 
 export default Tasks;

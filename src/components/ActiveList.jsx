@@ -1,14 +1,26 @@
-import React from 'react'
-import Task from './Task'
+import React, { useContext, useEffect, useState } from "react";
+import Task from "./Task";
+import TasksContext from "../contexts/TasksContext";
 
-const ActiveList = ({atasks, edit, del, complete}) => {
-    return (
-        <ul id="task-list" className="space-y-3">
-            {atasks.map((task)=>(
-                <Task key={task.id} task={task} edit={edit} del={del} complete={complete}/>
-            ))}
-        </ul>
-    )
-}
+const ActiveList = () => {
+  const tasksState = useContext(TasksContext);
+  const [list, setList] = useState(
+    tasksState.tasks.filter((task) => !task.done)
+  );
 
-export default ActiveList
+  useEffect(() => {
+    const activeTasks = tasksState.tasks.filter((task) => !task.done);
+    console.log(activeTasks);
+    setList(activeTasks);
+  }, [tasksState.tasks]);
+
+  return (
+    <ul id="task-list" className="space-y-3">
+      {list.map((task) => (
+        <Task key={task.id} task={task} />
+      ))}
+    </ul>
+  );
+};
+
+export default ActiveList;
