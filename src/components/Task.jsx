@@ -5,12 +5,14 @@ const Task = ({ task }) => {
   const tasksState = useContext(TasksContext);
   const [checked, setChecked] = useState(false);
 
+  //complete chek box handeler
   const completed = (e) => {
     const change = e.target.checked;
     setChecked(change);
     done(task.id);
   };
 
+  //completing task functionality
   const done = (id) => {
     const task = tasksState.tasks.filter((t) => {
       t.id === id;
@@ -28,6 +30,18 @@ const Task = ({ task }) => {
     }
   };
 
+  //delete button handeler
+  const deleteHandle = () => {
+    console.log(task.id);
+    deleteTask(task.id);
+  };
+
+  //delete functionality
+  const deleteTask = (id) => {
+    const edited = tasksState.tasks.filter((task) => task.id !== id);
+    tasksState.setTasks(edited);
+  };
+
   return (
     <>
       <li className="task-item flex items-center gap-4 p-4 rounded-lg transition-all bg-gray-700/60">
@@ -41,7 +55,7 @@ const Task = ({ task }) => {
         <span className="flex-grow text-lg text-gray-100">{task.text}</span>
         <div className="flex gap-2">
           <button
-            className="edit-btn p-2 rounded-md hover:bg-gray-600/50 transition-colors"
+            className="edit-btn p-2 rounded-md hover:bg-gray-600/50 transition-colors cursor-pointer"
             aria-label="Edit task"
           >
             <svg
@@ -60,8 +74,9 @@ const Task = ({ task }) => {
             </svg>
           </button>
           <button
-            className="delete-btn p-2 rounded-md hover:bg-gray-600/50 transition-colors"
+            className="delete-btn p-2 rounded-md hover:bg-gray-600/50 transition-colors cursor-pointer"
             aria-label="Delete task"
+            onClick={deleteHandle}
           >
             <svg
               className="w-5 h-5 text-rose-500"
