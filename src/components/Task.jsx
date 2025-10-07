@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import TasksContext from "../contexts/TasksContext";
 import EditTask from "./EditTask";
+import { toast } from "react-toastify";
 
 const Task = ({ task }) => {
   const tasksState = useContext(TasksContext);
@@ -12,6 +13,7 @@ const Task = ({ task }) => {
     const change = e.target.checked;
     setChecked(change);
     done(task.id);
+    toast.success("One task completed");
   };
 
   //completing task functionality
@@ -35,6 +37,7 @@ const Task = ({ task }) => {
   //delete button handeler
   const deleteHandle = () => {
     deleteTask(task.id);
+    toast.error("One task deleted");
   };
 
   //delete functionality

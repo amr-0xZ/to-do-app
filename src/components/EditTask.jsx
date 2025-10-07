@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import TasksContext from "../contexts/TasksContext";
+import { toast } from "react-toastify";
 
 const EditTask = ({ task, setEdit }) => {
   const tasksState = useContext(TasksContext);
@@ -13,6 +14,7 @@ const EditTask = ({ task, setEdit }) => {
   const editHandle = () => {
     saveTask(task.id);
     cancleHandle();
+    toast.success("Edited one task");
   };
 
   const saveTask = (id) => {
