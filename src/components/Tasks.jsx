@@ -5,7 +5,7 @@ import TasksContext from "../contexts/TasksContext";
 
 const Tasks = () => {
   const tasksState = useContext(TasksContext);
-  const [view, setView] = useState(<ActiveList />);
+  const [view, setView] = useState(<EmptyActive />);
 
   useEffect(() => {
     const activeTasks = tasksState.tasks.filter((task) => !task.done);
