@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import TasksContext from "../contexts/TasksContext";
+import EditTask from "./EditTask";
 
 const Task = ({ task }) => {
   const tasksState = useContext(TasksContext);
   const [checked, setChecked] = useState(false);
+  const [editFrame, setEditFrame] = useState();
 
   //complete chek box handeler
   const completed = (e) => {
@@ -14,15 +16,15 @@ const Task = ({ task }) => {
 
   //completing task functionality
   const done = (id) => {
-    const task = tasksState.tasks.filter((t) => {
+    const etask = tasksState.tasks.filter((t) => {
       t.id === id;
     });
-    if (task) {
-      task.done = !task.done;
-      task.completeDate = task.done ? new Date().toISOString() : null;
-      task.text = task.text;
-      task.id = id;
-      const editedTask = { ...task };
+    if (etask) {
+      etask.done = !task.done;
+      etask.completeDate = new Date().toISOString();
+      etask.text = task.text;
+      etask.id = id;
+      const editedTask = { ...etask };
       const edited = tasksState.tasks.filter((task) => task.id !== id);
       edited.push(editedTask);
       tasksState.setTasks(edited);
@@ -32,7 +34,6 @@ const Task = ({ task }) => {
 
   //delete button handeler
   const deleteHandle = () => {
-    console.log(task.id);
     deleteTask(task.id);
   };
 
@@ -40,6 +41,10 @@ const Task = ({ task }) => {
   const deleteTask = (id) => {
     const edited = tasksState.tasks.filter((task) => task.id !== id);
     tasksState.setTasks(edited);
+  };
+
+  const editHandle = () => {
+    setEditFrame(<EditTask task={task} setEdit={setEditFrame} />);
   };
 
   return (
@@ -57,6 +62,7 @@ const Task = ({ task }) => {
           <button
             className="edit-btn p-2 rounded-md hover:bg-gray-600/50 transition-colors cursor-pointer"
             aria-label="Edit task"
+            onClick={editHandle}
           >
             <svg
               className="w-5 h-5 text-teal-400"
@@ -95,6 +101,7 @@ const Task = ({ task }) => {
           </button>
         </div>
       </li>
+      {editFrame}
     </>
   );
 };

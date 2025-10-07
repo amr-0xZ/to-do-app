@@ -5,10 +5,6 @@ const AddForm = () => {
   const tasksState = useContext(TasksContext);
   const [task, setTask] = useState("");
 
-  useEffect(() => {
-    console.log(tasksState.tasks);
-  }, [tasksState.tasks]);
-
   //add new task
   const addTask = (txt) => {
     const newTask = {
@@ -48,7 +44,7 @@ const AddForm = () => {
         ></input>
         <button
           type="submit"
-          className="bg-teal-800 text-white font-semibold rounded-lg px-5 py-3 hover:bg-teal-700 active:scale-95 transition-all shadow-lg"
+          className="bg-teal-800 text-white font-semibold rounded-lg px-5 py-3 hover:bg-teal-700 active:scale-95 transition-all shadow-lg cursor-pointer"
           aria-label="Add new task"
         >
           Add Task
